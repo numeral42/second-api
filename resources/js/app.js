@@ -1,0 +1,15 @@
+// resources/js/app.js
+
+import './../../vendor/power-components/livewire-powergrid/dist/powergrid'
+
+import '../js/sweetalert.js';
+
+import '../js/assets/string_to_slug.js';
+import '../js/assets/initializeFaq.js';
+import '../js/assets/initializeComparisonTableHover.js';
+
+import Quill from 'quill';
+
+import 'quill/dist/quill.snow.css';
+
+window.Quill = Quill;

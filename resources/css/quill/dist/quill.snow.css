@@ -1,0 +1,467 @@
+/* Inicio del grupo */
+.ql-editor :not(blockquote)+blockquote,
+.ql-editor>blockquote:first-child {
+    padding-top: 15px;
+}
+
+/* Fin del grupo */
+.ql-editor blockquote:not(:has(+ blockquote)) {
+    padding-bottom: 15px;
+}
+
+.ql-editor blockquote {
+    border-left: 4px solid #555555;
+    background-color: #eeeeee;
+    padding-left: 16px;
+    width: 75%;
+    margin-left: 25% !important;
+}
+
+/**/
+
+/* Inicio del grupo */
+.ql-snow .ql-editor :not(blockquote)+blockquote,
+.ql-snow .ql-editor>blockquote:first-child {
+    padding-top: 15px;
+}
+
+/* Fin del grupo */
+.ql-snow .ql-editor blockquote:not(:has(+ blockquote)) {
+    padding-bottom: 15px;
+}
+
+.ql-snow .ql-editor blockquote {
+    border-left: 4px solid #555555;
+    background-color: #eeeeee;
+    padding-left: 16px;
+    width: 75%;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    margin-left: 25% !important;
+}
+
+/**/
+
+/**/
+
+.ql-code-block-container {
+    background-color: #a4dcf1;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 5px 0;
+}
+
+/* preguntas frecuentes */
+
+/* Contenedor general */
+#questions.ql-editor {
+    margin: 40px 0;
+    padding: 0;
+    white-space: normal;
+}
+
+/* Título principal */
+#questions.ql-editor>h4 {
+    margin: 0 0 24px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #18181b !important;
+}
+
+/* Cada pregunta */
+#questions.ql-editor>h3 {
+    position: relative;
+    margin: 0 0 16px;
+    padding: 16px 52px 16px 20px;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    background-color: #f8f9fa !important;
+    color: #27272a !important;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    cursor: pointer;
+    user-select: none;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+#questions.ql-editor>h3:hover {
+    border-color: #d4d4d8;
+    background-color: #f4f4f5;
+}
+
+/* Símbolo + */
+#questions.ql-editor>h3::after {
+    content: "+";
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1;
+    transform: translateY(-50%);
+}
+
+/* Pregunta abierta */
+#questions.ql-editor>h3.faq-open {
+    margin-bottom: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #f4f4f5 !important;
+}
+
+#questions.ql-editor>h3.faq-open::after {
+    content: "−";
+}
+
+/* Respuesta */
+#questions.ql-editor>h3+p {
+    display: none;
+    margin: 0 0 16px;
+    padding: 16px 20px;
+    border: 1px solid #e4e4e7;
+    border-top: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: #ffffff !important;
+    color: #52525b !important;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Respuesta abierta */
+#questions.ql-editor>h3.faq-open+p {
+    display: block;
+}
+
+/* Modo oscuro */
+.dark #questions.ql-editor>h4 {
+    color: #f4f4f5;
+}
+
+.dark #questions.ql-editor>h3 {
+    border-color: #3f3f46;
+    background-color: #27272a;
+    color: #f4f4f5;
+}
+
+.dark #questions.ql-editor>h3:hover,
+.dark #questions.ql-editor>h3.faq-open {
+    border-color: #52525b;
+    background-color: #3f3f46;
+}
+
+.dark #questions.ql-editor>h3+p {
+    border-color: #3f3f46;
+    background-color: #18181b;
+    color: #d4d4d8;
+}
+
+/* final */
+
+
+/**/
+
+.ql-snow .ql-picker.ql-callout {
+    width: 190px;
+}
+
+.ql-snow .ql-picker.ql-callout .ql-picker-label::before {
+    content: "Bloque especial";
+}
+
+.ql-snow .ql-picker.ql-callout .ql-picker-item:not([data-value])::before {
+    content: "Texto normal";
+}
+
+.ql-snow .ql-picker.ql-callout .ql-picker-item[data-value="professional-tip"]::before {
+    content: "💡 Consejo profesional";
+    background-color: #247ab4 !important;
+}
+
+.ql-snow .ql-picker.ql-callout .ql-picker-item[data-value="warning"]::before {
+    content: "⚠️ Precaución";
+}
+
+.ql-snow .ql-picker.ql-callout .ql-picker-item[data-value="note"]::before {
+    content: "📌 Nota";
+}
+
+.ql-snow .ql-picker.ql-callout .ql-picker-item[data-value="recommendation"]::before {
+    content: "✅ Recomendación";
+}
+
+/**/
+/*
+|--------------------------------------------------------------------------
+| Estilo común
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor .ql-callout {
+    position: relative;
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 4px 20px 4px 24px;
+
+    border: 0;
+    border-left: 5px solid;
+    border-radius: 0;
+
+    font-style: normal;
+    line-height: 1.65;
+}
+
+.ql-editor .ql-callout:not(.ql-callout + .ql-callout) {
+    margin-top: 18px;
+    padding-top: 48px;
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.ql-editor .ql-callout:not(:has(+ .ql-callout)) {
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.ql-editor .ql-callout:not(.ql-callout + .ql-callout):not(:has(+ .ql-callout)) {
+    border-radius: 10px;
+}
+
+.ql-editor .ql-callout:has(> br:only-child) {
+    min-height: 16px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.ql-editor .ql-callout:not(.ql-callout + .ql-callout)::before {
+    position: absolute;
+    top: 14px;
+    left: 24px;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.2;
+
+    pointer-events: none;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Consejo profesional
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor .ql-callout[data-callout="professional-tip"] {
+    background-color: #eff6ff;
+    border-left-color: #2563eb;
+    color: #1e3a8a;
+}
+
+.ql-editor .ql-callout[data-callout="professional-tip"]:not(.ql-callout + .ql-callout)::before {
+    content: "💡 Consejo profesional";
+    color: #1d4ed8;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Precaución
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor .ql-callout[data-callout="warning"] {
+    background-color: #fff7ed;
+    border-left-color: #ea580c;
+    color: #7c2d12;
+}
+
+.ql-editor .ql-callout[data-callout="warning"]:not(.ql-callout + .ql-callout)::before {
+    content: "⚠️ Precaución";
+    color: #c2410c;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Nota
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor .ql-callout[data-callout="note"] {
+    background-color: #f4f4f5;
+    border-left-color: #71717a;
+    color: #27272a;
+}
+
+.ql-editor .ql-callout[data-callout="note"]:not(.ql-callout + .ql-callout)::before {
+    content: "📌 Nota";
+    color: #52525b;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Recomendación
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor .ql-callout[data-callout="recommendation"] {
+    background-color: #f0fdf4;
+    border-left-color: #16a34a;
+    color: #14532d;
+}
+
+.ql-editor .ql-callout[data-callout="recommendation"]:not(.ql-callout + .ql-callout)::before {
+    content: "✅ Recomendación";
+    color: #15803d;
+}
+
+/**/
+
+/* Tabla */
+
+/*
+|--------------------------------------------------------------------------
+| Tabla comparativa — estilo Apple
+|--------------------------------------------------------------------------
+*/
+.ql-comparison {
+    max-width: 80%;
+    margin: 0 auto;
+
+    border: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    text-align: center;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Celdas
+|--------------------------------------------------------------------------
+*/
+
+.ql-comparison th,
+.ql-comparison td {
+    padding: 12px 16px;
+    border: 0;
+    border-bottom: 1px solid #d2d2d7;
+    transition: background-color 160ms ease;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Encabezado: borde inferior de 2 px
+|--------------------------------------------------------------------------
+*/
+
+.ql-comparison thead th {
+    border: 0;
+    border-bottom: 2px solid #a1a1a6;
+    font-weight: 600;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Primera columna
+|--------------------------------------------------------------------------
+*/
+
+.ql-comparison tbody th {
+    border: 0;
+    border-bottom: 1px solid #d2d2d7;
+    text-align: left;
+    font-weight: 600;
+    cursor: default;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Resto de las celdas
+|--------------------------------------------------------------------------
+*/
+
+.ql-comparison tbody td {
+    border: 0;
+    border-bottom: 1px solid #d2d2d7;
+    text-align: center;
+}
+.ql-comparison tbody tr:last-child td {
+    border: none;
+}
+.ql-comparison tbody tr:last-child th {
+    border: none;
+}
+
+
+.ql-editor {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.ql-comparison {
+    width: 80%;
+    min-width: 700px;
+    margin: 0 auto;
+
+    border: 0;
+    border-collapse: collapse;
+    table-layout: auto;
+    text-align: center;
+}
+
+.ql-comparison th,
+.ql-comparison td {
+    padding: 12px 16px;
+    border: 0;
+    border-bottom: 1px solid #d2d2d7;
+    white-space: nowrap;
+}
+
+.ql-comparison thead th {
+    border-bottom: 2px solid #a1a1a6;
+    font-weight: 600;
+}
+
+.ql-comparison tbody th {
+    text-align: left;
+    font-weight: 600;
+}
+
+.ql-comparison tbody tr:last-child th,
+.ql-comparison tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+
+.ql-editor ol {
+margin: 0 !important;
+padding: 0 !important;
+color:oklch(55.2% 0.016 285.938);
+}
+.ql-editor ol a {
+color:oklch(57.7% 0.245 27.325);
+font-weight: bold;
+}
+/* 
+.ql-editor {
+    padding: 0 !important;
+    margin: 0 !important;
+} */
+
+#sources .ql-editor{
+    white-space:initial;
+    margin-bottom: 0 !important;
+    
+}
