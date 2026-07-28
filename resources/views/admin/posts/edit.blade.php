@@ -19,14 +19,15 @@
         @method('PUT')
 
         <div class=" relative mb-4 border-3 border-dashed border-zinc-200 dark:border-zinc-700 p-1">
-            <img class="w-full aspect-video object-cover object-center" src="{{ asset('assets/no-image.png') }}"
-                alt="" srcset="">
+            <img class="w-full aspect-video object-cover object-center" src="{{ $post->image_path ? Storage::url($post->image_path) : asset('assets/no-image.png') }}"
+                alt="{{ $post->title }}" srcset="">
             <div class="absolute top-8 right-8">
 
 
             <label class="cursor-pointer inline-flex items-center gap-2 rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 dark:focus:ring-zinc-400">
                 Cambiar imagen
                 <flux:input type="file" name="image" id="image" class="hidden" accept="image/*" />
+                <flux:error name="image" />
             </label>
             </div>
         </div>

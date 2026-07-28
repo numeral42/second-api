@@ -69,22 +69,41 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(EditPostRequest $request, Post $post)
-    {
+public function update(EditPostRequest $request, Post $post)
+{
+    $data = $request->validated();
 
-        Storage::disk('public')->put('images/posts/', $request->file('image'));
+    if ($request->hasFile('image')) {
+        // Elimina la imagen anterior
+        if ($post->image_path) {
+            Storage::disk('public')->delete($post->image_path);
+        }
 
-        $post->update($request->validated());
+        $image = $request->file('image');
 
-        return redirect()
-            ->route('admin.posts.edit', $post)
-            ->with('swal', [
-                'icon' => 'success',
-                'title' => 'Post actualizado exitosamente.',
-                'text' => 'El post ha sido actualizado correctamente.',
-            ]);
+        $filename = $data['slug']
+            . '-'
+            . time()
+            . '.'
+            . $image->getClientOriginalExtension();
 
+        $data['image_path'] = $image->storeAs(
+            'images/posts',
+            $filename,
+            'public'
+        );
     }
+
+    $post->update($data);
+
+    return redirect()
+        ->route('admin.posts.edit', $post)
+        ->with('swal', [
+            'icon' => 'success',
+            'title' => 'Post actualizado exitosamente.',
+            'text' => 'El post ha sido actualizado correctamente.',
+        ]);
+}
 
     /**
      * Remove the specified resource from storage.
