@@ -96,6 +96,23 @@
             </flux:field>
 
             <flux:field class="mb-4 bg-white text-zinc-900 p-4 rounded-lg">
+
+                <flux:label class="bg-white text-zinc-900">Etiquetas:</flux:label>
+
+                <select id="select-tags" name="tags[]" multiple placeholder="Seleccione las etiquetas..."
+                    autocomplete="off">
+                    {{-- <option value="">Seleccione las etiquetas...</option> --}}
+                    @foreach ($tags as $tag)
+                        <option data-color="{{ $tag->color }}" value="{{ $tag->id }}"
+                            @selected(in_array($tag->id, old('tags', $post->tags->pluck('id')->toArray())))>
+                            {{ $tag->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+            </flux:field>
+
+            <flux:field class="mb-4 bg-white text-zinc-900 p-4 rounded-lg">
                 <flux:label class="bg-white text-zinc-900">Resumen:</flux:label>
 
                 <div id="summary-editor" data-quill-input="summary" data-placeholder="Escribe el resumen del post..."
@@ -218,6 +235,47 @@
         </div>
     </form>
     @push('js')
+        <script>
+            new TomSelect('#select-tags', {
+                plugins: ['remove_button'],
+
+                render: {
+                    option: function(data, escape) {
+                        return `
+                <div class="flex items-center gap-2">
+                    <span
+                        style="
+                            width:15px;
+                            height:15px;
+                            border-radius:5px;
+                            background:${data.$option.dataset.color};
+                        "
+                    ></span>
+
+                    ${escape(data.text)}
+                </div>
+            `;
+                    },
+
+                    item: function(data, escape) {
+                        return `
+                <div class="flex items-center gap-2">
+                    <span
+                        style="
+                            width:12px;
+                            height:12px;
+                            border-radius:2px;
+                            background:${data.$option.dataset.color};
+                        "
+                    ></span>
+
+                    ${escape(data.text)}
+                </div>
+            `;
+                    }
+                }
+            });
+        </script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const editors = document.querySelectorAll('[data-quill-input]');
@@ -791,7 +849,6 @@
                 });
             });
         </script>
-
     @endpush
 
 </x-layouts::app>

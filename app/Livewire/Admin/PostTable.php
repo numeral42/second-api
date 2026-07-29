@@ -237,11 +237,15 @@ final class PostTable extends PowerGridComponent
 
         $isPublished = ! $post->is_published;
 
+        /* if(!$post->published_at ) {
+            $data['published_at'] = now();
+        } */
+
         $post->update([
             'is_published' => $isPublished,
             'published_at' => $isPublished
                 ? ($post->published_at ?? now())
-                : null,
+                : $post->published_at,
         ]);
     }
 

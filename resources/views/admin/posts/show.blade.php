@@ -20,15 +20,22 @@
             {!! $post->summary !!}
         </div>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between mb-2">
 
             <span class="flex"><flux:icon.pencil-square />Autor: {!! $post->user->name !!}</span>
             <span class="flex"><flux:icon.calendar-days />Publicado: {!! $post->published_at !!}</span>
         </div>
 
-        <div class="">
+        <div class="relative">
             <img class="w-full aspect-video object-cover object-center" src="{{ $post->image_path ? Storage::url($post->image_path) : asset('assets/no-image.png') }}"
                 alt="{{ $post->title }}" srcset="">
+            <div class="absolute -bottom-5 -right-5 gap-1 flex flex-wrap justify-end p-2 max-w-1/2 text-right">
+                @foreach ($post->tags as $tag)
+                    <span class="whitespace-nowrap px-2 py-1 rounded-lg text-white text-sm font-bold" style="background-color: {{ $tag->color }};">
+                        {{ $tag->name }}
+                    </span>
+                @endforeach
+            </div>
         </div>
         <div class="ql-editor post-content">
             <div class="ql-comparison-wrapper">

@@ -28,6 +28,8 @@ class EditPostRequest extends FormRequest
             'category_id' => ['required', 'exists:categories,id'],
             'image' => ['nullable', 'image', 'max:2048'],
             'is_published' => ['required', 'boolean'],
+            'tags' => ['nullable', 'array'],
+            'tags.*' => ['exists:tags,id'],
             'summary' => ['nullable', 'string'],
             'body' => ['nullable', 'string'],
             'questions' => ['nullable', 'string'],

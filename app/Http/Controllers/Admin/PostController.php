@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Models\Tag;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -61,58 +62,68 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $categories = \App\Models\Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-public function update(EditPostRequest $request, Post $post)
-{
-    $data = $request->validated();
+    public function update(EditPostRequest $request, Post $post)
+    {
 
-    if ($request->hasFile('image')) {
-        
-        // Elimina la imagen anterior
-        if ($post->image_path) {
-            if($post->image_path && Storage::disk('public')->exists($post->image_path)) {
-                Storage::disk('public')->delete($post->image_path);
-            }
+        $data = $request->validated();
+
+        if( $request->is_published && !$post->published_at ) {
+            $data['published_at'] = now();
         }
 
-        $image = $request->file('image');
+        if ($request->hasFile('image')) {
 
-        $filename = $data['slug']
-            . '-'
-            . time()
-            . '.'
-            . $image->getClientOriginalExtension();
+            // Elimina la imagen anterior
+            if ($post->image_path) {
+                if ($post->image_path && Storage::disk('public')->exists($post->image_path)) {
+                    Storage::disk('public')->delete($post->image_path);
+                }
+            }
 
-        $data['image_path'] = $image->storeAs(
-            'images/posts',
-            $filename,
-            'public'
-        );
-    }
+            $image = $request->file('image');
 
-    $post->update($data);
+            $filename = $data['slug']
+                . '-'
+                . time()
+                . '.'
+                . $image->getClientOriginalExtension();
 
-      session()->flash('swal', [
+            $data['image_path'] = $image->storeAs(
+                'images/posts',
+                $filename,
+                'public'
+            );
+        }
+
+        $post->update($data);
+
+        $post->tags()->sync($request->input('tags', []));
+
+        session()->flash('swal', [
             'icon' => 'success',
             'title' => 'Post actualizado exitosamente.',
             'text' => 'El post ha sido actualizado correctamente.',
         ]);
 
         return redirect()->route('admin.posts.edit', $post);
-   
-}
+    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Post $post)
     {
+        if ($post->image_path && Storage::disk('public')->exists($post->image_path)) {
+            Storage::disk('public')->delete($post->image_path);
+        }
 
         $post->delete();
     }

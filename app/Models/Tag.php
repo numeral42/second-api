@@ -16,4 +16,9 @@ class Tag extends Api
         'color',
     ];
 
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
+
 }
