@@ -17,7 +17,7 @@
 
     @livewire('Admin\CategoryTable')
 
-    @push('js')
+{{--     @push('js')
         @if (session()->has('swal'))
             <script>
                 document.addEventListener('livewire:init', () => {
@@ -34,7 +34,7 @@
             </script>
         @endif
         </script>
-    @endpush
+    @endpush --}}
 
 
 </x-layouts::app>

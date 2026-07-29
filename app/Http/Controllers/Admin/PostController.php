@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Http\Requests\CreatePostRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EditPostRequest;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +24,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = \App\Models\Category::all();
+        $categories = Category::all();
         return view('admin.posts.create', compact('categories'));
     }
 
@@ -74,9 +73,12 @@ public function update(EditPostRequest $request, Post $post)
     $data = $request->validated();
 
     if ($request->hasFile('image')) {
+        
         // Elimina la imagen anterior
         if ($post->image_path) {
-            Storage::disk('public')->delete($post->image_path);
+            if($post->image_path && Storage::disk('public')->exists($post->image_path)) {
+                Storage::disk('public')->delete($post->image_path);
+            }
         }
 
         $image = $request->file('image');
@@ -96,13 +98,14 @@ public function update(EditPostRequest $request, Post $post)
 
     $post->update($data);
 
-    return redirect()
-        ->route('admin.posts.edit', $post)
-        ->with('swal', [
+      session()->flash('swal', [
             'icon' => 'success',
             'title' => 'Post actualizado exitosamente.',
             'text' => 'El post ha sido actualizado correctamente.',
         ]);
+
+        return redirect()->route('admin.posts.edit', $post);
+   
 }
 
     /**
@@ -110,6 +113,7 @@ public function update(EditPostRequest $request, Post $post)
      */
     public function destroy(Post $post)
     {
-        //
+
+        $post->delete();
     }
 }

@@ -80,20 +80,9 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category, bool $redirect = true)
+    public function destroy(Category $category)
     {
+
         $category->delete();
-
-        /* if (! $redirect) {
-        return;
-    }
-
-    return redirect()
-        ->route('admin.categories.index')
-        ->with('swal', [
-            'icon' => 'success',
-            'title' => 'Categoría eliminada.',
-            'text' => 'La categoría ha sido eliminada correctamente.',
-        ]); */
     }
 }

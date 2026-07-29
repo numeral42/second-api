@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Http\Controllers\Admin\PostController;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,6 +20,7 @@ use Illuminate\Contracts\View\View;
 final class PostTable extends PowerGridComponent
 {
     public string $tableName = 'postTable';
+    public string $primaryKey = 'id';
 
     /*
     |--------------------------------------------------------------------------
@@ -48,7 +50,6 @@ final class PostTable extends PowerGridComponent
         return [
             PowerGrid::header()
                 ->showSearchInput(),
-
             PowerGrid::footer()
                 ->showPerPage()
                 ->showRecordCount(),
@@ -223,41 +224,13 @@ final class PostTable extends PowerGridComponent
     |--------------------------------------------------------------------------
     */
 
-/*     #[On('edit')]
-    public function edit(int|string $rowId): void
-    {
-        $this->redirect(
-            route('admin.posts.edit', $rowId),
-            navigate: true
-        );
-    } */
     public function actionsFromView($row): View
     {
         return view('admin.partials.post-actions', [
             'row' => $row,
         ]);
     }
- /*    public function actions(Post $row): array
-    {
-        return [
-            Button::add('edit')
-                ->slot('Editar')
-                ->id()
-                ->class(
-                    'pg-btn-white ' .
-                        'dark:ring-pg-primary-600 ' .
-                        'dark:border-pg-primary-600 ' .
-                        'dark:hover:bg-pg-primary-700 ' .
-                        'dark:ring-offset-pg-primary-800 ' .
-                        'dark:text-pg-primary-300 ' .
-                        'dark:bg-pg-primary-700'
-                )
-                ->dispatch('edit', [
-                    'rowId' => $row->id,
-                ]),
-        ];
-    } */
-
+ 
     public function togglePostStatus(int $postId): void
     {
         $post = Post::query()->findOrFail($postId);
@@ -270,5 +243,22 @@ final class PostTable extends PowerGridComponent
                 ? ($post->published_at ?? now())
                 : null,
         ]);
+    }
+
+    public function deletePost(int $id): void
+    {
+
+        $post = Post::findOrFail($id);
+
+        app(PostController::class)->destroy($post);
+
+        $this->dispatch('pg:eventRefresh-postTable');
+
+        $this->dispatch(
+            'swal-message',
+            icon: 'success',
+            title: 'Publicación eliminada',
+            text: 'La publicación fue eliminada correctamente.'
+        );
     }
 }

@@ -26,7 +26,10 @@
             <span class="flex"><flux:icon.calendar-days />Publicado: {!! $post->published_at !!}</span>
         </div>
 
-        <img src="{{ asset('assets/image.png') }}" alt="" srcset="">
+        <div class="">
+            <img class="w-full aspect-video object-cover object-center" src="{{ $post->image_path ? Storage::url($post->image_path) : asset('assets/no-image.png') }}"
+                alt="{{ $post->title }}" srcset="">
+        </div>
         <div class="ql-editor post-content">
             <div class="ql-comparison-wrapper">
                 {!! $post->body !!}

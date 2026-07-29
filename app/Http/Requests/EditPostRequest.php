@@ -23,7 +23,7 @@ class EditPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
+            'title' => ['required', 'string', 'max:255', 'unique:posts,title,' . $this->route('post')->id],
             'slug' => ['required', 'string', 'max:255', 'unique:posts,slug,' . $this->route('post')->id],
             'category_id' => ['required', 'exists:categories,id'],
             'image' => ['nullable', 'image', 'max:2048'],

@@ -17,7 +17,7 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
-        $title = $this->faker->sentence();
+        $title = $this->faker->unique()->sentence();
         static $order = 0;
         return [
             'title' => $title,

@@ -7,6 +7,7 @@ import '../js/sweetalert.js';
 import '../js/assets/string_to_slug.js';
 import '../js/assets/initializeFaq.js';
 import '../js/assets/initializeComparisonTableHover.js';
+import '../js/assets/previewImage.js';
 
 import Quill from 'quill';
 

@@ -15,14 +15,8 @@
 
     </div>
 
-
-    {{-- @foreach ($categories as $category)
-    {{ $category }}
-@endforeach --}}
-
-
     @livewire('Admin\PostTable')
-
+{{-- 
     @push('js')
         @if (session()->has('swal'))
             <script>
@@ -40,7 +34,7 @@
             </script>
         @endif
         </script>
-    @endpush
+    @endpush --}}
 
 
 </x-layouts::app>
