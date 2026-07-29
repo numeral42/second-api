@@ -16,25 +16,12 @@
     </div>
 
     @livewire('Admin\PostTable')
-{{-- 
-    @push('js')
-        @if (session()->has('swal'))
-            <script>
-                document.addEventListener('livewire:init', () => {
-                    Livewire.on('swal', (event) => {
-                        const data = Array.isArray(event) ? event[0] : event;
 
-                        window.swalMessage(
-                            @json(session('swal.icon')),
-                            @json(session('swal.title')),
-                            @json(session('swal.text'))
-                        );
-                    });
-                });
-            </script>
-        @endif
+{{--     @push('js')
+        <script>
+
         </script>
-    @endpush --}}
-
+    @endpush
+ --}}
 
 </x-layouts::app>

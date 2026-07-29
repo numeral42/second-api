@@ -230,16 +230,13 @@ final class PostTable extends PowerGridComponent
             'row' => $row,
         ]);
     }
- 
-    public function togglePostStatus(int $postId): void
+
+/*     public function togglePostStatus(int $postId): void
     {
         $post = Post::query()->findOrFail($postId);
 
         $isPublished = ! $post->is_published;
 
-        /* if(!$post->published_at ) {
-            $data['published_at'] = now();
-        } */
 
         $post->update([
             'is_published' => $isPublished,
@@ -247,7 +244,64 @@ final class PostTable extends PowerGridComponent
                 ? ($post->published_at ?? now())
                 : $post->published_at,
         ]);
+    } */
+    
+public function togglePostStatus(int $postId): void
+{
+    $post = Post::query()->findOrFail($postId);
+
+    $isPublishing = ! $post->is_published;
+
+    if ($isPublishing) {
+        $requiredFields = [
+            'Título' => $post->title,
+            'Slug' => $post->slug,
+            'Resumen' => $post->summary,
+            'Contenido' => $post->body,
+            'Preguntas frecuentes' => $post->questions,
+            'Fuentes' => $post->sources,
+            'Categoría' => $post->category_id,
+            'Autor' => $post->user_id,
+            'Imagen' => $post->image_path,
+            'Orden' => $post->order,
+        ];
+
+        $missingFields = collect($requiredFields)
+            ->filter(fn ($value) => blank($value))
+            ->keys();
+
+        if ($missingFields->isNotEmpty()) {
+            $this->dispatch('swal-message', [
+                'icon' => 'error',
+                'title' => 'No se puede publicar',
+                'text' => 'Faltan los siguientes campos: ' . $missingFields->implode(', ') . '.',
+            ]);
+
+            return;
+        }
     }
+
+    $post->update([
+        'is_published' => $isPublishing,
+        'published_at' => $isPublishing
+            ? ($post->published_at ?? now())
+            : $post->published_at,
+    ]);
+
+    $this->dispatch('swal-message', [
+        'icon' => 'success',
+        'title' => $isPublishing ? 'Post publicado' : 'Post despublicado',
+        'text' => $isPublishing
+            ? 'El post fue publicado correctamente.'
+            : 'El post fue enviado a borrador.',
+       /*  'options' => [
+            'timer' => 1800,
+            'showConfirmButton' => false,
+        ], */
+    ]);
+
+    $this->dispatch('$refresh');
+}
 
     public function deletePost(int $id): void
     {

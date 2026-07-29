@@ -86,10 +86,10 @@
                        dark:border-zinc-700">
                 <flux:radio.group label="Estado:" name="is_published" :value="old('is_published', $post->is_published)">
                     <flux:radio label="Publicado" value="1"
-                        :checked="old('is_published', $post->is_published) == 1" />
+                        :checked="old('is_published', $post->is_published) == 1" disabled/>
 
                     <flux:radio label="No publicado" value="0"
-                        :checked="old('is_published', $post->is_published) == 0" />
+                        :checked="old('is_published', $post->is_published) == 0" disabled/>
                 </flux:radio.group>
 
                 <flux:error name="is_published" />
