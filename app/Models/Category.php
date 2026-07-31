@@ -19,4 +19,9 @@ class Category extends Api
     {
         return $this->hasMany(Post::class);
     }
+
+/*     public function getRouteKeyName(): string
+{
+    return 'slug';
+} */
 }

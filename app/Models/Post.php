@@ -33,6 +33,11 @@ class Post extends Api
         'published_at' => 'datetime',
     ];
 
+/*     public function getRouteKeyName(): string
+{
+    return 'slug';
+} */
+
     public function user()
     {
         return $this->belongsTo(User::class);

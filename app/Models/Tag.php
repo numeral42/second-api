@@ -16,6 +16,11 @@ class Tag extends Api
         'color',
     ];
 
+/*     public function getRouteKeyName(): string
+{
+    return 'slug';
+} */
+
     public function posts()
     {
         return $this->belongsToMany(Post::class);
