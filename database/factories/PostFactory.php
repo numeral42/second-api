@@ -26,8 +26,8 @@ class PostFactory extends Factory
             'body' => $this->faker->paragraphs(3, true),
             'questions' => $this->faker->paragraphs(2, true),
             'sources' => $this->faker->paragraphs(2, true),
-            /* 'is_published' => $this->faker->boolean(),
-            'published_at' => $this->faker->dateTime(), */
+            'is_published' => $this->faker->boolean(),
+            'published_at' => $this->faker->dateTime(),
             'order' => ++$order,
             'category_id' => \App\Models\Category::all()->random()->id,
             'user_id' => \App\Models\User::all()->random()->id,

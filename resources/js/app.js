@@ -1,7 +1,7 @@
 // resources/js/app.js
 
 import './../../vendor/power-components/livewire-powergrid/dist/powergrid'
-
+import './../js/assets/faq.js'
 import '../js/sweetalert.js';
 
 import '../js/assets/string_to_slug.js';

@@ -1,0 +1,457 @@
+/*
+|--------------------------------------------------------------------------
+| Selector del toolbar de Quill
+|--------------------------------------------------------------------------
+*/
+
+.ql-snow .ql-picker.ql-callout {
+    width: 190px;
+}
+
+.ql-snow .ql-picker.ql-callout .ql-picker-label::before {
+    content: "Bloque especial";
+}
+
+.ql-snow
+.ql-picker.ql-callout
+.ql-picker-item:not([data-value])::before {
+    content: "Texto normal";
+}
+
+.ql-snow
+.ql-picker.ql-callout
+.ql-picker-item[data-value="professional-tip"]::before {
+    content: "💡 Consejo profesional";
+}
+
+.ql-snow
+.ql-picker.ql-callout
+.ql-picker-item[data-value="warning"]::before {
+    content: "⚠️ Precaución";
+}
+
+.ql-snow
+.ql-picker.ql-callout
+.ql-picker-item[data-value="note"]::before {
+    content: "📌 Nota";
+}
+
+.ql-snow
+.ql-picker.ql-callout
+.ql-picker-item[data-value="recommendation"]::before {
+    content: "✅ Recomendación";
+}
+
+/*
+|--------------------------------------------------------------------------
+| Callout: estilo base
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor .ql-callout {
+    --callout-background: #eeeeef;
+    --callout-border: #71717a;
+    --callout-text: #27272a;
+    --callout-title: #52525b;
+
+    --callout-x: 7px;
+    --callout-y: -6px;
+    --callout-rotation: 0.18deg;
+
+    --border-x: -11px;
+    --border-y: 10px;
+    --border-rotation: -0.35deg;
+
+    position: relative;
+    z-index: 1;
+
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 5px 24px;
+
+    border: 0;
+    border-radius: 0 !important;
+
+    background-color: var(--callout-background);
+    color: var(--callout-text) !important;
+
+    font-style: normal;
+    line-height: 1.7;
+
+    transform:
+        translate(var(--callout-x), var(--callout-y))
+        rotate(var(--callout-rotation));
+
+    transform-origin: center;
+
+    box-shadow: none;
+
+    transition:
+        filter 0.35s ease,
+        background-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Primer fragmento del grupo
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor
+.ql-callout:not(.ql-callout + .ql-callout) {
+    margin-top: 34px;
+    padding-top: 52px;
+
+    box-shadow:
+        -7px -5px 16px rgb(0 0 0 / 0.05),
+         7px -5px 16px rgb(0 0 0 / 0.05);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Fragmentos siguientes
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor
+.ql-callout + .ql-callout {
+    margin-top: 0;
+
+    box-shadow:
+        -7px 0 16px rgb(0 0 0 / 0.04),
+         7px 0 16px rgb(0 0 0 / 0.04);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Último fragmento del grupo
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor
+.ql-callout:not(:has(+ .ql-callout)) {
+    margin-bottom: 34px;
+    padding-bottom: 20px;
+
+    box-shadow:
+        -7px 6px 16px rgb(0 0 0 / 0.05),
+         7px 6px 16px rgb(0 0 0 / 0.05),
+         0 8px 14px rgb(0 0 0 / 0.04);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Línea vacía dentro del bloque
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor
+.ql-callout:has(> br:only-child) {
+    min-height: 18px;
+
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Título: únicamente en el primer fragmento
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor
+.ql-callout:not(.ql-callout + .ql-callout)::before {
+    position: absolute;
+    z-index: 4;
+
+    top: 16px;
+    left: 24px;
+
+    color: var(--callout-title);
+
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.2;
+
+    transform:
+        translate(-2px, 1px)
+        rotate(-0.3deg);
+
+    pointer-events: none;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Capa del borde desalineado
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor .ql-callout::after {
+    content: "";
+
+    position: absolute;
+    z-index: 5;
+
+    inset: 0;
+
+    border-top: 0;
+    border-right: 1px solid var(--callout-border);
+    border-bottom: 0;
+    border-left: 1px solid var(--callout-border);
+
+    transform:
+        translate(var(--border-x), var(--border-y))
+        rotate(var(--border-rotation));
+
+    transform-origin: center;
+
+    pointer-events: none;
+}
+
+/* Borde superior: solo en el primero */
+
+.ql-editor
+.ql-callout:not(.ql-callout + .ql-callout)::after {
+    border-top: 1px solid var(--callout-border);
+}
+
+/* Borde inferior: solo en el último */
+
+.ql-editor
+.ql-callout:not(:has(+ .ql-callout))::after {
+    border-bottom: 1px solid var(--callout-border);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Consejo profesional
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor
+.ql-callout[data-callout="professional-tip"] {
+    --callout-background: #eaf3ff;
+    --callout-border: #2563eb;
+    --callout-text: #1e3a8a;
+    --callout-title: #1d4ed8;
+}
+
+/* Corrige el selector anterior para el mismo elemento */
+
+.ql-editor
+.ql-callout[data-callout="professional-tip"]:not(
+    .ql-callout + .ql-callout
+)::before {
+    content: "💡 Consejo profesional";
+}
+
+/*
+|--------------------------------------------------------------------------
+| Precaución
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor
+.ql-callout[data-callout="warning"] {
+    --callout-background: #fff1e6;
+    --callout-border: #ea580c;
+    --callout-text: #7c2d12;
+    --callout-title: #c2410c;
+}
+
+.ql-editor
+.ql-callout[data-callout="warning"]:not(
+    .ql-callout + .ql-callout
+)::before {
+    content: "⚠️ Precaución";
+}
+
+/*
+|--------------------------------------------------------------------------
+| Nota
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor
+.ql-callout[data-callout="note"] {
+    --callout-background: #eeeeef;
+    --callout-border: #71717a;
+    --callout-text: #27272a;
+    --callout-title: #52525b;
+}
+
+.ql-editor
+.ql-callout[data-callout="note"]:not(
+    .ql-callout + .ql-callout
+)::before {
+    content: "📌 Nota";
+}
+
+/*
+|--------------------------------------------------------------------------
+| Recomendación
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor
+.ql-callout[data-callout="recommendation"] {
+    --callout-background: #e8f8ed;
+    --callout-border: #16a34a;
+    --callout-text: #14532d;
+    --callout-title: #15803d;
+}
+
+.ql-editor
+.ql-callout[data-callout="recommendation"]:not(
+    .ql-callout + .ql-callout
+)::before {
+    content: "✅ Recomendación";
+}
+
+/*
+|--------------------------------------------------------------------------
+| Hover
+|--------------------------------------------------------------------------
+|
+| No modifica transform.
+| Quill genera un elemento por cada línea y mover solamente la línea bajo
+| el cursor rompería visualmente el grupo.
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor .ql-callout:hover {
+    filter:
+        brightness(1.025)
+        saturate(1.02);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Modo oscuro
+|--------------------------------------------------------------------------
+*/
+
+.dark .ql-editor .ql-callout {
+    --callout-background: #27272a;
+    --callout-border: #71717a;
+    --callout-text: #e4e4e7;
+    --callout-title: #f4f4f5;
+}
+
+.dark
+.ql-editor
+.ql-callout[data-callout="professional-tip"] {
+    --callout-background: #1e293b;
+    --callout-border: #60a5fa;
+    --callout-text: #dbeafe;
+    --callout-title: #93c5fd;
+}
+
+.dark
+.ql-editor
+.ql-callout[data-callout="warning"] {
+    --callout-background: #431407;
+    --callout-border: #fb923c;
+    --callout-text: #ffedd5;
+    --callout-title: #fdba74;
+}
+
+.dark
+.ql-editor
+.ql-callout[data-callout="note"] {
+    --callout-background: #27272a;
+    --callout-border: #a1a1aa;
+    --callout-text: #e4e4e7;
+    --callout-title: #d4d4d8;
+}
+
+.dark
+.ql-editor
+.ql-callout[data-callout="recommendation"] {
+    --callout-background: #052e16;
+    --callout-border: #4ade80;
+    --callout-text: #dcfce7;
+    --callout-title: #86efac;
+}
+
+.dark
+.ql-editor
+.ql-callout:not(.ql-callout + .ql-callout) {
+    box-shadow:
+        -8px -5px 18px rgb(0 0 0 / 0.26),
+         8px -5px 18px rgb(0 0 0 / 0.26);
+}
+
+.dark
+.ql-editor
+.ql-callout + .ql-callout {
+    box-shadow:
+        -8px 0 18px rgb(0 0 0 / 0.22),
+         8px 0 18px rgb(0 0 0 / 0.22);
+}
+
+.dark
+.ql-editor
+.ql-callout:not(:has(+ .ql-callout)) {
+    box-shadow:
+        -8px 6px 18px rgb(0 0 0 / 0.26),
+         8px 6px 18px rgb(0 0 0 / 0.26),
+         0 9px 16px rgb(0 0 0 / 0.22);
+}
+
+.dark .ql-editor .ql-callout:hover {
+    filter:
+        brightness(1.08)
+        saturate(1.04);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Responsive
+|--------------------------------------------------------------------------
+*/
+
+@media (max-width: 640px) {
+    .ql-editor .ql-callout {
+        --callout-x: 5px;
+        --callout-y: -4px;
+        --callout-rotation: 0.12deg;
+
+        --border-x: -8px;
+        --border-y: 8px;
+        --border-rotation: -0.22deg;
+
+        padding-right: 18px;
+        padding-left: 18px;
+    }
+
+    .ql-editor
+    .ql-callout:not(.ql-callout + .ql-callout) {
+        margin-top: 28px;
+        padding-top: 48px;
+    }
+
+    .ql-editor
+    .ql-callout:not(.ql-callout + .ql-callout)::before {
+        left: 18px;
+    }
+
+    .ql-editor
+    .ql-callout:not(:has(+ .ql-callout)) {
+        margin-bottom: 28px;
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Accesibilidad
+|--------------------------------------------------------------------------
+*/
+
+@media (prefers-reduced-motion: reduce) {
+    .ql-editor .ql-callout {
+        transition: none;
+    }
+}

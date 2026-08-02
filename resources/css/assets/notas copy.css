@@ -1,0 +1,189 @@
+/**/
+
+.ql-snow .ql-picker.ql-callout {
+    width: 190px;
+}
+
+.ql-snow .ql-picker.ql-callout .ql-picker-label::before {
+    content: "Bloque especial";
+}
+
+.ql-snow .ql-picker.ql-callout .ql-picker-item:not([data-value])::before {
+    content: "Texto normal";
+}
+
+.ql-snow .ql-picker.ql-callout .ql-picker-item[data-value="professional-tip"]::before {
+    content: "💡 Consejo profesional";
+    background-color: #247ab4 !important;
+}
+
+.ql-snow .ql-picker.ql-callout .ql-picker-item[data-value="warning"]::before {
+    content: "⚠️ Precaución";
+}
+
+.ql-snow .ql-picker.ql-callout .ql-picker-item[data-value="note"]::before {
+    content: "📌 Nota";
+}
+
+.ql-snow .ql-picker.ql-callout .ql-picker-item[data-value="recommendation"]::before {
+    content: "✅ Recomendación";
+}
+
+/**/
+/*
+|--------------------------------------------------------------------------
+| Estilo común
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor .ql-callout {
+    position: relative;
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 4px 20px 4px 24px;
+
+    border: 0;
+    border-right: 5px solid;
+    border-bottom: 5px solid;
+    border-radius: 0 !important;
+
+    font-style: normal;
+    line-height: 1.65;
+}
+
+.ql-editor .ql-callout:not(.ql-callout + .ql-callout) {
+    margin-top: 18px;
+    padding-top: 48px;
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.ql-editor .ql-callout:not(:has(+ .ql-callout)) {
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.ql-editor .ql-callout:not(.ql-callout + .ql-callout):not(:has(+ .ql-callout)) {
+    border-radius: 10px;
+}
+
+.ql-editor .ql-callout:has(> br:only-child) {
+    min-height: 16px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.ql-editor .ql-callout:not(.ql-callout + .ql-callout)::before {
+    position: absolute;
+    top: 14px;
+    left: 24px;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.2;
+
+    pointer-events: none;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Consejo profesional
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor .ql-callout[data-callout="professional-tip"] {
+    background-color: #eff6ff;
+    border-left-color: #2563eb;
+    color: #1e3a8a;
+}
+
+.ql-editor .ql-callout[data-callout="professional-tip"]:not(.ql-callout + .ql-callout)::before {
+    content: "💡 Consejo profesional";
+    color: #1d4ed8;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Precaución
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor .ql-callout[data-callout="warning"] {
+    background-color: #fff7ed;
+    border-left-color: #ea580c;
+    color: #7c2d12;
+}
+
+.ql-editor .ql-callout[data-callout="warning"]:not(.ql-callout + .ql-callout)::before {
+    content: "⚠️ Precaución";
+    color: #c2410c;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Nota
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor .ql-callout[data-callout="note"] {
+    background-color: #f4f4f5;
+    border-left-color: #71717a;
+    color: #27272a;
+}
+
+.ql-editor .ql-callout[data-callout="note"]:not(.ql-callout + .ql-callout)::before {
+    content: "📌 Nota";
+    color: #52525b;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Recomendación
+|--------------------------------------------------------------------------
+*/
+
+.ql-editor .ql-callout[data-callout="recommendation"] {
+    background-color: #f0fdf4;
+    border-left-color: #16a34a;
+    color: #14532d;
+}
+
+.ql-editor .ql-callout[data-callout="recommendation"]:not(.ql-callout + .ql-callout)::before {
+    content: "✅ Recomendación";
+    color: #15803d;
+}
+
+/* Modo Oscuro */
+
+.dark .ql-callout {
+    border-color: #3f3f46;
+    background: #18181b;
+    color: #e4e4e7;
+}
+
+.dark .ql-callout[data-callout="professional-tip"] {
+    background: rgb(30 41 59);
+}
+
+.dark .ql-callout[data-callout="warning"] {
+    background: rgb(69 26 3);
+}
+
+.dark .ql-callout[data-callout="recommendation"] {
+    background: rgb(69 10 10);
+}
+
+.dark .ql-callout[data-callout="info"] {
+    background: rgb(8 47 73);
+}
+
+/* Fin Modo Oscuro */

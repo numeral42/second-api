@@ -112,11 +112,11 @@
 
             </flux:field>
 
-            <flux:field class="mb-4 bg-white text-zinc-900 p-4 rounded-lg">
-                <flux:label class="bg-white text-zinc-900">Resumen:</flux:label>
+            <flux:field class="mb-4 ">
+                <flux:label class="">Resumen:</flux:label>
 
                 <div id="summary-editor" data-quill-input="summary" data-placeholder="Escribe el resumen del post..."
-                    class="quill-editor bg-white text-zinc-900 {{-- dark:bg-zinc-900 dark:text-zinc-100 --}}"></div>
+                    class="quill-editor bg-white text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100"></div>
 
                 <input type="hidden" name="summary" id="summary" value="{{ old('summary', $post->summary) }}">
 

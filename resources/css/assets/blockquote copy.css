@@ -1,0 +1,44 @@
+/* Inicio del grupo */
+.ql-editor :not(blockquote)+blockquote,
+.ql-editor>blockquote:first-child {
+    padding-top: 15px;
+}
+
+/* Fin del grupo */
+.ql-editor blockquote:not(:has(+ blockquote)) {
+    padding-bottom: 15px;
+}
+
+.ql-editor blockquote {
+    border-left: 4px solid #555555;
+    background-color: #eeeeee;
+    padding-left: 16px;
+    width: 75%;
+    margin-left: 25% !important;
+}
+
+/**/
+
+/* Inicio del grupo */
+.ql-snow .ql-editor :not(blockquote)+blockquote,
+.ql-snow .ql-editor>blockquote:first-child {
+    padding-top: 15px;
+}
+
+/* Fin del grupo */
+.ql-snow .ql-editor blockquote:not(:has(+ blockquote)) {
+    padding-bottom: 15px;
+}
+
+.ql-snow .ql-editor blockquote {
+    border-left: 4px solid #555555;
+    background-color: #eeeeee;
+    padding-left: 16px;
+    width: 75%;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    margin-left: 25% !important;
+}
+
+/**/
+

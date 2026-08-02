@@ -1,0 +1,231 @@
+/* =========================================================
+   BLOCKQUOTE
+========================================================= */
+
+.ql-editor blockquote {
+
+    --blockquote-background: #f4f4f5;
+    /* zinc-100 */
+    --blockquote-background-hover: #e4e4e7;
+    /* zinc-200 */
+    --blockquote-text: #3f3f46;
+    /* zinc-700 */
+    --blockquote-quote: #a1a1aa;
+    /* zinc-400 */
+    --blockquote-separator: #a1a1aa;
+    /* zinc-400 */
+
+    position: relative;
+
+    margin: auto !important;
+    padding: 10px 40px 10px 52px !important;
+
+    border: 0 !important;
+
+    background:
+        linear-gradient(to right,
+            rgb(24 24 27 / .03) 0,
+            transparent 12px,
+            transparent calc(100% - 12px),
+            rgb(24 24 27 / .03) 100%),
+        var(--blockquote-background);
+
+    color: var(--blockquote-text);
+
+    font-size: 1.08rem;
+    font-style: italic;
+    line-height: 1.6;
+
+    box-shadow:
+        -8px 0 16px rgb(24 24 27 /.05),
+        8px 0 16px rgb(24 24 27 /.05),
+        0 2px 5px rgb(24 24 27 /.02);
+
+    transition:
+        background-color .35s ease,
+        box-shadow .35s ease;
+
+    width: 90%;
+}
+
+/* =========================================================
+   Primer bloque
+========================================================= */
+
+.ql-editor blockquote:not(:is(blockquote + blockquote)) {
+
+    margin-top: 40px !important;
+
+    padding-top: 38px !important;
+}
+
+/* =========================================================
+   Bloques siguientes
+========================================================= */
+
+.ql-editor blockquote+blockquote {
+
+    position: relative;
+
+    margin-top: 0 !important;
+
+    padding-top: 34px !important;
+}
+
+/* =========================================================
+   Último bloque
+========================================================= */
+
+.ql-editor blockquote:not(:has(+ blockquote)) {
+
+    margin-bottom: 40px !important;
+
+    padding-bottom: 28px !important;
+}
+
+/* =========================================================
+   Comilla
+========================================================= */
+
+.ql-editor blockquote::before {
+
+    content: none;
+}
+
+.ql-editor blockquote:not(:is(blockquote + blockquote))::before {
+
+    content: "❝";
+
+    position: absolute;
+
+    top: -18px;
+    left: 14px;
+
+    color: var(--blockquote-quote);
+
+    font-family: Georgia, serif;
+    font-size: 6.5rem;
+    font-weight: 700;
+    line-height: 1;
+
+    opacity: .32;
+
+    transform: rotate(-8deg);
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+
+    pointer-events: none;
+}
+
+/* =========================================================
+   Separador
+========================================================= */
+
+/* .ql-editor blockquote + blockquote::after{
+
+    content:"───── ◆ ─────";
+
+    position:absolute;
+
+    top:8px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    color:var(--blockquote-separator);
+
+    font-size:.70rem;
+
+    letter-spacing:.08rem;
+
+    opacity:.65;
+
+    white-space:nowrap;
+
+    font-style:normal;
+
+    pointer-events:none;
+} */
+
+/* =========================================================
+   Hover
+========================================================= */
+
+.ql-editor blockquote:hover {
+
+    background:
+        linear-gradient(to right,
+            rgb(24 24 27 /.05) 0,
+            transparent 12px,
+            transparent calc(100% - 12px),
+            rgb(24 24 27 /.05) 100%),
+        var(--blockquote-background-hover);
+
+    box-shadow:
+        -10px 0 22px rgb(24 24 27 /.08),
+        10px 0 22px rgb(24 24 27 /.08),
+        0 3px 8px rgb(24 24 27 /.04);
+}
+
+.ql-editor blockquote:not(:is(blockquote + blockquote)):hover::before {
+
+    opacity: .5;
+
+    transform: rotate(-4deg);
+}
+
+/* =========================================================
+   Dark
+========================================================= */
+
+.dark .ql-editor blockquote {
+
+    --blockquote-background: #27272a;
+    /* zinc-800 */
+    --blockquote-background-hover: #3f3f46;
+    /* zinc-700 */
+    --blockquote-text: #e4e4e7;
+    /* zinc-200 */
+    --blockquote-quote: #71717a;
+    /* zinc-500 */
+    --blockquote-separator: #71717a;
+    /* zinc-500 */
+
+    background:
+        linear-gradient(to right,
+            rgb(255 255 255 /.02) 0,
+            transparent 12px,
+            transparent calc(100% - 12px),
+            rgb(255 255 255 /.02) 100%),
+        var(--blockquote-background);
+
+    color: var(--blockquote-text);
+
+    box-shadow:
+        -10px 0 20px rgb(0 0 0 /.30),
+        10px 0 20px rgb(0 0 0 /.30),
+        0 2px 5px rgb(0 0 0 /.15);
+}
+
+.dark .ql-editor blockquote:hover {
+
+    background:
+        linear-gradient(to right,
+            rgb(255 255 255 /.03) 0,
+            transparent 12px,
+            transparent calc(100% - 12px),
+            rgb(255 255 255 /.03) 100%),
+        var(--blockquote-background-hover);
+
+    box-shadow:
+        -12px 0 24px rgb(0 0 0 /.40),
+        12px 0 24px rgb(0 0 0 /.40),
+        0 3px 8px rgb(0 0 0 /.20);
+}
+
+.dark .ql-editor blockquote+blockquote::after {
+
+    opacity: .8;
+}

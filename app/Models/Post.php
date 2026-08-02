@@ -53,4 +53,12 @@ class Post extends Api
         return $this->belongsToMany(Tag::class);
     }
 
+    public function comments()
+{
+    return $this->hasMany(Comment::class)
+        ->whereNull('parent_id')
+        ->where('is_approved', true)
+        ->latest();
+}
+
 }

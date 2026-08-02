@@ -1,0 +1,196 @@
+
+/* Estilos #questions */
+/* Contenedor general */
+
+/* =========================================================
+   CONTENIDO DINÁMICO DE PREGUNTAS FRECUENTES
+========================================================= */
+
+#questions .ql-editor {
+    margin: 2.75rem 0 1.25rem;
+    padding: 0;
+    white-space: normal;
+    overflow: visible;
+}
+
+/* Preguntas */
+#questions .ql-editor > h3 {
+    position: relative;
+
+    margin: 0;
+    padding: 1rem 3.5rem 1rem 1.25rem;
+
+    border: 1px solid #e4e4e7;
+    border-radius: 0.5rem;
+
+    background-color: #ffffff !important;
+    color: #27272a !important;
+
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+
+    cursor: pointer;
+    user-select: none;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Separación entre preguntas */
+#questions .ql-editor > h3:not(:first-child) {
+    margin-top: 1rem;
+}
+
+/* Hover */
+#questions .ql-editor > h3:hover {
+    border-color: #d4d4d8;
+    background-color: #f4f4f5 !important;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.05);
+}
+
+/* Símbolo + */
+#questions .ql-editor > h3::after {
+    content: "+";
+
+    position: absolute;
+    top: 50%;
+    right: 1.25rem;
+
+    color: #52525b;
+
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1;
+
+    transform: translateY(-50%);
+}
+
+/* Pregunta abierta */
+#questions .ql-editor > h3.faq-open {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+
+    background-color: #f4f4f5 !important;
+}
+
+/* Símbolo abierto */
+#questions .ql-editor > h3.faq-open::after {
+    content: "−";
+}
+
+/* Respuestas */
+#questions .ql-editor > h3 + p {
+    display: none;
+
+    margin: 0;
+    padding: 1rem 1.25rem;
+
+    border: 1px solid #e4e4e7;
+    border-top: 0;
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+
+    background-color: #ffffff !important;
+    color: #52525b !important;
+
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Respuesta abierta */
+#questions .ql-editor > h3.faq-open + p {
+    display: block;
+}
+
+/* Enlaces dentro de las respuestas */
+#questions .ql-editor > h3 + p a {
+    color: #2563eb;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+#questions .ql-editor > h3 + p a:hover {
+    color: #1d4ed8;
+}
+
+/* Listas dentro de respuestas */
+#questions .ql-editor > h3 + p ul {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+#questions .ql-editor > h3 + p ol {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+    list-style-type: decimal;
+}
+
+/* =========================================================
+   MODO OSCURO
+========================================================= */
+
+.dark #questions .ql-editor > h3 {
+    border-color: #3f3f46;
+    background-color: #27272a !important;
+    color: #f4f4f5 !important;
+}
+
+.dark #questions .ql-editor > h3:hover,
+.dark #questions .ql-editor > h3.faq-open {
+    border-color: #52525b;
+    background-color: #3f3f46 !important;
+}
+
+.dark #questions .ql-editor > h3::after {
+    color: #d4d4d8;
+}
+
+.dark #questions .ql-editor > h3 + p {
+    border-color: #3f3f46;
+    background-color: #18181b !important;
+    color: #d4d4d8 !important;
+}
+
+.dark #questions .ql-editor > h3 + p a {
+    color: #60a5fa;
+}
+
+.dark #questions .ql-editor > h3 + p a:hover {
+    color: #93c5fd;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 640px) {
+    #questions .ql-editor {
+        margin-top: 2.5rem;
+    }
+
+    #questions .ql-editor > h3 {
+        padding:
+            0.875rem
+            3rem
+            0.875rem
+            1rem;
+
+        font-size: 0.95rem;
+    }
+
+    #questions .ql-editor > h3::after {
+        right: 1rem;
+        font-size: 1.35rem;
+    }
+
+    #questions .ql-editor > h3 + p {
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* Final Estilos #questions */

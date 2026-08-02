@@ -5,6 +5,12 @@
 
 @import '../../vendor/power-components/livewire-powergrid/resources/css/tailwind4.css';
 
+@import '../css/assets/notas.css';
+@import '../css/assets/blockquote.css';
+@import '../css/assets/questions.css';
+@import '../css/assets/style.css';
+@import '../css/assets/codeBlock.css';
+
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';

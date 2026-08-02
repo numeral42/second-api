@@ -80,7 +80,20 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post->load(['category', 'user', 'tags']);
+        /* $post->load(['category', 'user', 'tags']); */
+
+        $post->load([
+            'category',
+            'user',
+            'tags',
+            'comments' => function ($query) {
+                $query->with([
+                    'user',
+                    'replies.user',
+                    'replies.likes',
+                ])->withCount('replies');
+            },
+        ]);
 
         $previousPost = Post::query()
             ->where('is_published', true)

@@ -13,6 +13,7 @@ class Category extends Api
     protected $fillable = [
         'name',
         'slug',
+        'color',
     ];
 
     public function posts()
