@@ -35,7 +35,7 @@
             <main class="space-y-6">
 
                 {{-- Imagen principal y título --}}
-                <article class="relative min-h-[340px] overflow-hidden rounded-2xl bg-zinc-900">
+                <article class="relative min-h-[340px] overflow-hidden rounded-2xl bg-zinc-900 aspect-video">
                     @if ($post->image_path)
                         <img src="{{ Storage::url($post->image_path) }}" alt="{{ $post->title }}"
                             class="absolute inset-0 h-full w-full object-cover">

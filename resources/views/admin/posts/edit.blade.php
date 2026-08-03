@@ -1,4 +1,4 @@
-<x-layouts::app :title="__('Posts')">
+<x-layouts::app="__('Posts')">
 
     <flux:breadcrumbs class="mb-4">
         <flux:breadcrumbs.item href="{{ route('admin.dashboard') }}" separator="slash">
@@ -38,7 +38,7 @@
         </div>
         <div
             class="rounded-lg border border-zinc-200 bg-zinc-50 px-6 py-8
-               dark:border-zinc-700 dark:bg-zinc-900">
+           dark:border-zinc-700 dark:bg-zinc-900">
 
             <flux:field class="mb-4">
                 <flux:label badge="Required">
@@ -83,13 +83,13 @@
             </flux:field>
 
             <flux:field class="mb-4 rounded-lg border border-zinc-200 p-4
-                       dark:border-zinc-700">
+                   dark:border-zinc-700">
                 <flux:radio.group label="Estado:" name="is_published" :value="old('is_published', $post->is_published)">
                     <flux:radio label="Publicado" value="1"
-                        :checked="old('is_published', $post->is_published) == 1" disabled/>
+                        :checked="old('is_published', $post->is_published) == 1" disabled />
 
                     <flux:radio label="No publicado" value="0"
-                        :checked="old('is_published', $post->is_published) == 0" disabled/>
+                        :checked="old('is_published', $post->is_published) == 0" disabled />
                 </flux:radio.group>
 
                 <flux:error name="is_published" />
@@ -234,48 +234,8 @@
 
         </div>
     </form>
+
     @push('js')
-        <script>
-            new TomSelect('#select-tags', {
-                plugins: ['remove_button'],
-
-                render: {
-                    option: function(data, escape) {
-                        return `
-                <div class="flex items-center gap-2">
-                    <span
-                        style="
-                            width:15px;
-                            height:15px;
-                            border-radius:5px;
-                            background:${data.$option.dataset.color};
-                        "
-                    ></span>
-
-                    ${escape(data.text)}
-                </div>
-            `;
-                    },
-
-                    item: function(data, escape) {
-                        return `
-                <div class="flex items-center gap-2">
-                    <span
-                        style="
-                            width:12px;
-                            height:12px;
-                            border-radius:2px;
-                            background:${data.$option.dataset.color};
-                        "
-                    ></span>
-
-                    ${escape(data.text)}
-                </div>
-            `;
-                    }
-                }
-            });
-        </script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const editors = document.querySelectorAll('[data-quill-input]');
@@ -288,152 +248,6 @@
                     return;
                 }
 
-                /*
-                |--------------------------------------------------------------------------
-                | Callouts
-                |--------------------------------------------------------------------------
-                */
-
-                const Block = Quill.import('blots/block');
-
-                class CalloutBlot extends Block {
-                    static blotName = 'callout';
-                    static tagName = 'div';
-                    static className = 'ql-callout';
-
-                    static allowedTypes = [
-                        'professional-tip',
-                        'warning',
-                        'note',
-                        'recommendation',
-                    ];
-
-                    static create(value) {
-                        const node = super.create();
-                        const type = this.allowedTypes.includes(value) ?
-                            value :
-                            'note';
-
-                        node.setAttribute('data-callout', type);
-
-                        return node;
-                    }
-
-                    static formats(node) {
-                        return node.getAttribute('data-callout') ?? 'note';
-                    }
-
-                    format(name, value) {
-                        if (name !== CalloutBlot.blotName) {
-                            super.format(name, value);
-                            return;
-                        }
-
-                        if (value && CalloutBlot.allowedTypes.includes(value)) {
-                            this.domNode.setAttribute('data-callout', value);
-                            return;
-                        }
-
-                        this.replaceWith('block');
-                    }
-                }
-
-                Quill.register(CalloutBlot, true);
-
-                /*
-                |--------------------------------------------------------------------------
-                | Tabla comparativa
-                |--------------------------------------------------------------------------
-                */
-
-                const BlockEmbed = Quill.import('blots/block/embed');
-
-                class ComparisonTableBlot extends BlockEmbed {
-                    static blotName = 'comparison-table';
-                    static tagName = 'table';
-                    static className = 'ql-comparison';
-
-                    static create(value) {
-                        const node = super.create();
-                        const data = this.normalizeValue(value);
-
-                        node.setAttribute('contenteditable', 'false');
-                        node.dataset.comparisonTable = JSON.stringify(data);
-
-                        const thead = document.createElement('thead');
-                        const headerRow = document.createElement('tr');
-
-                        data.headers.forEach(function(header) {
-                            const th = document.createElement('th');
-
-                            th.setAttribute('scope', 'col');
-                            th.textContent = header;
-
-                            headerRow.appendChild(th);
-                        });
-
-                        thead.appendChild(headerRow);
-
-                        const tbody = document.createElement('tbody');
-
-                        data.rows.forEach(function(row) {
-                            const tr = document.createElement('tr');
-
-                            data.headers.forEach(function(_, columnIndex) {
-                                const cell = columnIndex === 0 ?
-                                    document.createElement('th') :
-                                    document.createElement('td');
-
-                                if (columnIndex === 0) {
-                                    cell.setAttribute('scope', 'row');
-                                }
-
-                                cell.textContent = row[columnIndex] ?? '';
-
-                                tr.appendChild(cell);
-                            });
-
-                            tbody.appendChild(tr);
-                        });
-
-                        node.appendChild(thead);
-                        node.appendChild(tbody);
-
-                        return node;
-                    }
-
-                    static value(node) {
-                        try {
-                            return JSON.parse(
-                                node.dataset.comparisonTable ?? '{}'
-                            );
-                        } catch {
-                            return {
-                                headers: [],
-                                rows: [],
-                            };
-                        }
-                    }
-
-                    static normalizeValue(value) {
-                        return {
-                            headers: Array.isArray(value?.headers) ?
-                                value.headers.map(function(header) {
-                                    return String(header ?? '').trim();
-                                }) : [],
-
-                            rows: Array.isArray(value?.rows) ?
-                                value.rows.map(function(row) {
-                                    return Array.isArray(row) ?
-                                        row.map(function(cell) {
-                                            return String(cell ?? '').trim();
-                                        }) : [];
-                                }) : [],
-                        };
-                    }
-                }
-
-                Quill.register(ComparisonTableBlot, true);
 
                 /*
                 |--------------------------------------------------------------------------
@@ -851,4 +665,4 @@
         </script>
     @endpush
 
-</x-layouts::app>
+    </x-layouts::app>
